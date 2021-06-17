@@ -97,7 +97,7 @@ class D6MapGenState extends State<D6MapGen> {
                         height: constraints.maxHeight,
                         color: Colors.white,
                         child: CustomPaint(
-                            painter: FaceOutlinePainter(perlinTemperature,
+                            painter: MapDrawer(perlinTemperature,
                                 perlinFrequency, perlinSeed))),
                   )),
             ),
