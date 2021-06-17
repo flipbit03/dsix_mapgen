@@ -27,7 +27,7 @@ class FaceOutlinePainter extends CustomPainter {
     myNoise.asMap().forEach((row, rowData) {
       rowData.asMap().forEach((column, value) {
         var p = Paint();
-        var v = ((value + this.perlinTemperature) * 256).clamp(0, 255) ~/ 52;
+        var v = ((value + this.perlinTemperature) * 256).clamp(0, 255) ~/ 51;
 
         p.color = a[v]!;
 
