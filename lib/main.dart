@@ -4,9 +4,7 @@ import 'mapgencanvas.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-void main() {
-  runApp(D6MapGen());
-}
+void main() => runApp(D6MapGen());
 
 class D6MapGen extends StatefulWidget {
   @override
@@ -26,82 +24,79 @@ class D6MapGenState extends State<D6MapGen> {
       home: Scaffold(
         // Outer white container with padding
 
-        body: Column(
-          children: [
-            SizedBox(
-              height: 29,
-            ),
-            Row(
-              children: [
-                Text("perlinSeed"),
-                Expanded(
+        body: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            children: [
+              SizedBox(height: 29),
+              Row(
+                children: [
+                  Text("perlinSeed"),
+                  Expanded(
                     child: Slider(
-                  value: perlinSeed,
-                  min: 0,
-                  max: 200000,
-                  divisions: 200000,
-                  label: perlinSeed.toString(),
-                  onChanged: (double value) {
-                    setState(() {
-                      perlinSeed = value;
-                    });
-                  },
-                )),
-              ],
-            ),
-            Row(
-              children: [
-                Text("perlinTemperature"),
-                Expanded(
-                    child: Slider(
-                  value: perlinTemperature,
-                  min: 0,
-                  max: 1,
-                  divisions: 200,
-                  label: perlinTemperature.toString(),
-                  onChanged: (double value) {
-                    setState(() {
-                      perlinTemperature = value;
-                    });
-                  },
-                )),
-              ],
-            ),
-            Row(
-              children: [
-                Text("perlinFrequency"),
-                Expanded(
-                  child: Slider(
-                    value: perlinFrequency,
-                    min: 0,
-                    max: 1,
-                    divisions: 200,
-                    label: perlinFrequency.toString(),
-                    onChanged: (double value) {
-                      setState(() {
-                        perlinFrequency = value;
-                      });
-                    },
+                      value: perlinSeed,
+                      min: 0,
+                      max: 200000,
+                      divisions: 200000,
+                      label: perlinSeed.toString(),
+                      onChanged: (double value) =>
+                          setState(() => perlinSeed = value),
+                    ),
                   ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("perlinTemperature"),
+                  Expanded(
+                    child: Slider(
+                      value: perlinTemperature,
+                      min: 0,
+                      max: 1,
+                      divisions: 200,
+                      label: perlinTemperature.toString(),
+                      onChanged: (double value) => setState(
+                        () => perlinTemperature = value,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("perlinFrequency"),
+                  Expanded(
+                    child: Slider(
+                      value: perlinFrequency,
+                      min: 0,
+                      max: 1,
+                      divisions: 200,
+                      label: perlinFrequency.toString(),
+                      onChanged: (double value) =>
+                          setState(() => perlinFrequency = value),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (_, constraints) => Container(
+                    padding: const EdgeInsets.all(20),
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight,
+                    child: CustomPaint(
+                      painter: MapDrawer(
+                        perlinTemperature,
+                        perlinFrequency,
+                        perlinSeed,
+                      ),
+                    ),
+                  ),
+                  // ),
                 ),
-              ],
-            ),
-            Expanded(
-              child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  color: Colors.white,
-                  // Inner yellow container
-                  child: LayoutBuilder(
-                    builder: (_, constraints) => Container(
-                        width: constraints.maxWidth,
-                        height: constraints.maxHeight,
-                        color: Colors.white,
-                        child: CustomPaint(
-                            painter: MapDrawer(perlinTemperature,
-                                perlinFrequency, perlinSeed))),
-                  )),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
